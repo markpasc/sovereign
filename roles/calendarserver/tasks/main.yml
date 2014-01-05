@@ -1,0 +1,4 @@
+---
+# Provides the CalendarServer calendar/contacts server.
+
+- include: calendarserver.yml tags=calendarserver

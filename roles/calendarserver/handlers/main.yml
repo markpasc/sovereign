@@ -1,0 +1,2 @@
+- name: restart calendarserver
+  command: /etc/init.d/calendarserver restart

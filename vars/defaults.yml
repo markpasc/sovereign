@@ -42,6 +42,18 @@ owncloud_db_username: owncloud
 # owncloud_db_password: (required)
 owncloud_db_database: owncloud
 
+# calendar server
+cal_domain: "cloud.{{ domain }}"
+cal_users:
+#  - account: "{{ main_user_name }}"
+#    name: "Your Name"
+#    password: (required)
+cal_superusers:
+#  - account: admin
+#    password: (required)
+cal_groups: []
+cal_locations: []
+
 # tarsnap
 tarsnap_version: 1.0.35
 

@@ -1,0 +1,26 @@
+- name: Install calendarserver
+  apt: pkg=calendarserver state=installed
+
+- name: Configure calendarserver accounts
+  template: src=etc_caldavd_accounts.xml.j2 dest=/etc/caldavd/accounts.xml group=root owner=root
+  notify: restart calendarserver
+
+- name: Configure calendarserver sudoers
+  template: src=etc_caldavd_sudoers.plist.j2 dest=/etc/caldavd/sudoers.plist group=root owner=root
+  notify: restart calendarserver
+
+- name: Enable calendarserver
+  template: src=etc_default_calendarserver.j2 dest=/etc/default/calendarserver group=root owner=root
+  notify: restart calendarserver
+
+- name: Proxify the calendarserver
+  template: src=etc_apache2_sites-available_calendarserver.j2 dest=/etc/apache2/sites-available/calendarserver
+  notify: restart apache
+
+- name: Enable Apache proxy module
+  command: a2enmod proxy_http creates=/etc/apache2/mods-enabled/proxy_http.load
+  notify: restart apache
+
+- name: Enable calendarserver proxifying
+  command: a2ensite calendarserver creates=/etc/apache2/sites-enabled/calendarserver
+  notify: restart apache
