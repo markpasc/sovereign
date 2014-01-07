@@ -2,15 +2,15 @@
   apt: pkg=calendarserver state=installed
 
 - name: Configure calendarserver accounts
-  template: src=etc_caldavd_accounts.xml.j2 dest=/etc/caldavd/accounts.xml group=root owner=root
+  template: src=etc_caldavd_accounts.xml.j2 dest=/etc/caldavd/accounts.xml group=caldavd owner=caldavd mode=0640
   notify: restart calendarserver
 
 - name: Configure calendarserver sudoers
-  template: src=etc_caldavd_sudoers.plist.j2 dest=/etc/caldavd/sudoers.plist group=root owner=root
+  template: src=etc_caldavd_sudoers.plist.j2 dest=/etc/caldavd/sudoers.plist group=caldavd owner=caldavd mode=0640
   notify: restart calendarserver
 
 - name: Enable calendarserver
-  template: src=etc_default_calendarserver.j2 dest=/etc/default/calendarserver group=root owner=root
+  template: src=etc_default_calendarserver.j2 dest=/etc/default/calendarserver
   notify: restart calendarserver
 
 - name: Proxify the calendarserver
